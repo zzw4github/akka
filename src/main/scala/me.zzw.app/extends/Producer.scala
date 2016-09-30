@@ -1,7 +1,6 @@
 package me.zzw.app.extend
 
 import akka.actor.{Actor, ActorLogging, ActorRef}
-import akka.stream.stage.GraphStageLogic.StageActorRef.Receive
 
 trait ProducerBehavior {
   this: Actor =>

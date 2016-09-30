@@ -18,7 +18,8 @@ import scala.concurrent.Await
     case object Shutdown
 
   def main(arg :Array[String]): Unit ={
-    val manager = ActorSystem("Manager").actorOf(Props[Manager], "manager")
+    val system = ActorSystem("Manager")
+    val manager = system.actorOf(Props[Manager], "manager")
     manager.tell("job", ActorRef.noSender)
     manager.tell(Shutdown, manager)
   }
@@ -48,6 +49,7 @@ class Manager extends Actor{
   def shuttingDown: Receive = {
     case "job" => sender() ! "service unavailable, shutting down"
     case Terminated(`crunch`) => context stop self
+
   }
 
 
